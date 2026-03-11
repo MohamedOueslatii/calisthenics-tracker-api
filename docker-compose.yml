@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    container_name: calisthenics_db
+    environment:
+      POSTGRES_USER: mohamed
+      POSTGRES_PASSWORD: mohamed123
+      POSTGRES_DB: calisthenics
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: calisthenics_api
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://mohamed:mohamed123@db:5432/calisthenics
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
