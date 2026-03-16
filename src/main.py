@@ -31,7 +31,7 @@ def health():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
         return {"status": "healthy", "database": "connected"}
-    except:
+    except Exception:
         return {"status": "unhealthy", "database": "disconnected"}
 
 # --- Exercises CRUD ---
