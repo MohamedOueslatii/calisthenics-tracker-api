@@ -1,44 +1,80 @@
-# Calisthenics Tracker API
+# 🏋️ DevSecOps Cloud-Native Platform
 
-Backend API for tracking calisthenics exercises, workouts, and progress.
+A complete DevSecOps pipeline for a containerized 
+FastAPI application with PostgreSQL, CI/CD, 
+Docker, and Kubernetes.
 
-Built as part of a DevOps learning project.
+---
 
-## Tech Stack
+## 🚀 Pipeline Flow
 
-- FastAPI
-- PostgreSQL
-- SQLAlchemy
-- Pydantic
-- Pytest
-- Docker
+git push
+    ↓
+GitHub Actions
+  → Tests (pytest)
+  → Lint (ruff)
+  → Docker build
+  → Push to Docker Hub
+    ↓
+Kubernetes
+  → FastAPI (2 replicas)
+  → PostgreSQL
 
-## Features
+---
 
-- Manage exercises
-- Manage workouts
-- Track training progress
-- REST API with automatic documentation
-- Automated tests
+## 🛠️ Technologies
 
-## Run the API
+| Category | Technology |
+|---|---|
+| Backend | FastAPI, Python |
+| Database | PostgreSQL, SQLAlchemy |
+| Testing | pytest |
+| Linting | ruff |
+| Containerization | Docker, Docker Compose |
+| Registry | Docker Hub |
+| Orchestration | Kubernetes (Kind) |
+| CI/CD | GitHub Actions |
 
-Create a virtual environment and install dependencies:
+---
 
-pip install -r requirements.txt
+## 📁 Project Structure
 
-Start the server:
+src/
+  main.py
+  db.py
+  models.py
+  schemas.py
+tests/
+k8s/
+  deployment.yaml
+  service.yaml
+  postgres.yaml
+.github/
+  workflows/
+    ci.yml
+    docker.yml
 
-uvicorn src.main:app --reload
+---
 
-API will be available at:
+## 🏃 How to Run
 
-http://localhost:8000
+### With Docker Compose
+docker compose up
 
-Swagger documentation:
+### With Kubernetes
+kind create cluster --name devsecops
+kubectl apply -f k8s/postgres.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl port-forward service/fitness-api-service 8000:80
 
+### Access the app
+http://localhost:8000/health
 http://localhost:8000/docs
 
-## Run tests
+---
 
-pytest
+## 🔜 Next Steps
+- Azure Container Registry (ACR)
+- Terraform (AKS)
+- Monitoring (Prometheus/Grafana)
