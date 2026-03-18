@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitness-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fitness-api
+  template:
+    metadata:
+      labels:
+        app: fitness-api
+    spec:
+      containers:
+        - name: fitness-api
+          image: mohamedoueslatii/calisthenics-api:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: postgresql://mohamed:mohamed123@postgres-service:5432/calisthenics
