@@ -33,3 +33,25 @@ def test_list_exercises():
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
+
+def test_create_workout():
+    payload = {
+        "name": "Morning Workout",
+        "description": "Simple calisthenics routine"
+    }
+
+    response = client.post("/workouts", json=payload)
+
+    assert response.status_code == 200
+    data = response.json()
+
+    assert data["name"] == "Morning Workout"
+    assert data["description"] == "Simple calisthenics routine"
+    assert "id" in data
+def test_list_workouts():
+    response = client.get("/workouts")
+
+    assert response.status_code == 200
+    data = response.json()
+
+    assert isinstance(data, list)
